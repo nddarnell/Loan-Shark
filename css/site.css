@@ -1,8 +1,8 @@
 :root{
-    --primary-color: #4281A4;
-    --secondary-color: #C1666B;
+    --primary-color: #628B9D;
+    --secondary-color: #F36D50;
     --dark-color: #171614;
-    --white-color: #E4DFDA;
+    --white-color: #E8EBE4;
 }
 body{
     color: var(--dark-color)
@@ -55,4 +55,7 @@ footer .social>a:hover{
 }
 .checklist>li i{
     color: var(--secondary-color)
+}
+.table>thead {
+    background-color: var(--primary-color)
 }

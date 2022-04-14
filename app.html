@@ -54,8 +54,81 @@
 
     <!-- MAIN SECTION -->
     <main class="flex-shrink-0">
-        <div class="container">
+        <div class="container mt-5">
+            <div class="row row-cols-1 row-cols-md-2">
+                <div class="col-6 border-end border-2">
+                    <h1 class="border-bottom">
+                        Loan Calculator
+                    </h1>
+                    <form action="input" class="row gy-2 gx-3 bg-light">
+                        <div class="col">
+                            <div class="form-header">Loan Amount</div>
+                            <input type="number" name="Loan Amount" id="loanAmount" class="form-control" placeholder="What is your loan amount?" value="" aria-label="Loan Amount Here">
+                            <div class="form-text">
+                                No $ symbol or commas needed. Ex: $15,000 input as 15000
+                            </div>
+                            <div class="form-header mt-2">Term Length:</div>
+                            <input type="number" name="lengthOfLoan" id="loanLength" class="form-control" placeholder="How many months is your loan?" value="" aria-label="Length of Loan here.">
+                            <div class="form-header mt-2">Interest Rate:</div>
+                            <input type="number" name="interestRate" id="interestRate" class="form-control" placeholder="What is the interest on your loan?" value="" aria-label="Interest Rate here">
+                            <div class="form-text">
+                                No % symbol needed.
+                            </div>
+                            
+                        </div>
+                        <div class="col-12 d-flex justify-content-end mb-3">
+                            <button type="button" id="btnSubmit" class="btn btn-outline-success btn-lg">Calculate</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <h3>Your Monthly Payments</h3>
+                    </div>
+                    <div id="monthlyPayments">
+                        <h2 class="fw-bold d-felx justify-content-center">
 
+                        </h2>
+                    </div>
+                    <div id="totalPrinciple">Total Principal: </div>
+                    <div id="totalInterest">Total Interest: </div>
+                    <div id="totalCost">Total Cost: </div>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table" id="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Month</th>
+                            <th scope="col">Payment</th>
+                            <th scope="col">Principal</th>
+                            <th scope="col">Interest</th>
+                            <th scope="col">Total Interest</th>
+                            <th scope="col">Balance</th>
+                        </tr>
+                    </thead>
+                    <!-- <tbody>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+
+                    </tbody> -->
+                </table>
+            </div>
+            
         </div>
     </main>
 
