@@ -59,3 +59,7 @@ footer .social>a:hover{
 .table>thead {
     background-color: var(--primary-color)
 }
+.table-row .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}

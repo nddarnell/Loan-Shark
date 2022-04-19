@@ -60,17 +60,107 @@
                 <div class="col-md-8">
                     <pre class="line-numbers">
                         <code class="language-javascript">
-                            // Call Hello World
-                            function helloWorld(){
-                                alert("Hello World");
+                            // Button event listener
+
+                            document.getElementById("btnSubmit").addEventListener("click", getValues)
+
+                            // Controller Function
+                            function getValues(){
+
+                                let loanAmount = document.getElementById("loanAmount").value;
+                                let loanLength = document.getElementById("loanLength").value;
+                                let interestRate = document.getElementById("interestRate").value;
+
+                                loanAmount = parseInt(loanAmount);
+                                loanLength = parseInt(loanLength);
+                                interestRate = parseInt(interestRate);
+                                
+                                if(Number.isInteger(loanAmount) && Number.isInteger(loanLength) && Number.isInteger(interestRate)){
+                                    
+                                    let values = new Object();
+                                    values = generatePayments(loanAmount, loanLength, interestRate);
+                                    displayNumbers(values.tableArray, values.totalInterest, values.paymentAmount, loanAmount);
+
+
+                                }else{
+                                    alert("You must enter Integer Values!")
+                                }
                             }
+
+                            // logic function
+                            function generatePayments(loanAmount, loanLength, interestRate){
+                                tableArray = [];
+
+                                let paymentAmount = (loanAmount * (interestRate/1200)) / (1 - ( 1 + (interestRate/1200))**-loanLength)
+                                let totalInterest = 0;
+
+                                // alert(paymentAmount.toFixed(2));
+
+                                for (let index = 0; index < loanLength; index++) {
+                                    month = index + 1;
+                                    interest = loanAmount * interestRate / 1200;
+                                    totalInterest += interest;
+                                    principal = paymentAmount - interest;
+
+                                    tableRow = `<td class="row">${month}</td>
+                                                <td>${paymentAmount.toFixed(2)}</td>
+                                                <td>${principal.toFixed(2)}</td>
+                                                <td>${interest.toFixed(2)}</td>
+                                                <td>${totalInterest.toFixed(2)}</td>
+                                                <td>${loanAmount.toFixed(2)}</td>`;
+                                
+                                    tableArray.push(tableRow);
+                                    loanAmount -= principal;
+                                }
+                                return {
+                                    tableArray,
+                                    totalInterest,
+                                    paymentAmount
+                                };
+
+                            }
+
+                            // display function
+                            function displayNumbers(tableArray, totalInterest, paymentAmount, loanAmount){
+
+                                totalCost = loanAmount + totalInterest;
+
+                                let s = (/\B(?=(\d{3})+(?!\d))/g)
+
+                                document.getElementById("monthlyPayments").innerHTML = `$${paymentAmount.toFixed(2).toString().replace(s, ",")}`;
+                                document.getElementById("totalPrincipal").innerHTML = `$${loanAmount.toFixed(2).toString().replace(s, ",")}`;
+                                document.getElementById("totalInterest").innerHTML = `$${totalInterest.toFixed(2).toString().replace(s, ",")}`;
+                                document.getElementById("totalCost").innerHTML = `$${totalCost.toFixed(2).toString().replace(s, ",")}`;
+
+                                tableBody = document.getElementById("tableBody")
+
+
+                                for (let index = 0; index < tableArray.length; index++) {
+                                    tableBody.innerHTML += tableArray[index]
+                                    
+                                }
+                            }
+
                         </code>
                     </pre>
                 </div>
                 <div class="col-md-4">
-                    <p>The Code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+                    <p>The Code is structured in three main functions.</p>
+                    <h2>Get Values</h2>
+                    <!-- this isnt done. -->
+                    <p>
+                        This is our controller function that allows us to grab the values the user has input into the form field, varify if those numbers are integers. Inside this function we also learned how to create an object and setting the values of our user input to this object to pass along to our other functions.
+                    </p>
+                    <h2>
+                        Generate Payments
+                    </h2>
+                    <p>
+                        This function is used as our logic function. Here is where we do all of the math necessary to calculate our loan as well as loop our values into a table row to eventually be pushed to the html using our last function.
+                    </p>
+                    <h2>Display Numbers</h2>
+                    <p>
+                        This is our display function which allows us to push the generated numbers to our front end for our user to view. We are simply looping our table body and pushing that to our table on the html page.
+                    </p>
                 </div>
             </div>
         </div>
@@ -94,7 +184,7 @@
                             <a target="_blank" href="https://www.linkedin.com/in/nathan-darnell-408169a8/"><i class="fab fa-linkedin fa-2x"></i></a>
                         </div>
                         <div class="col social">
-                            <a target="_blank" href="https://github.com/nddarnell"><i class="fab fa-github fa-2x"></i></a>
+                            <a target="_blank" href="https://github.com/nddarnell/Loan-Shark"><i class="fab fa-github fa-2x"></i></a>
                         </div>
                         <div class="col social">
                             <a target="_blank" href="https://twitter.com/mrcheddah13"><i class="fab fa-twitter fa-2x"></i></a>
